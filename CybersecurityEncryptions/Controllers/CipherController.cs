@@ -15,6 +15,11 @@ namespace CybersecurityEncryptions.Controllers
         }
         public IActionResult Polybius([FromForm] PolybiusSquare model)
         {
+            if(model.Key is not null)
+            {
+				model.Key = model.Key.ToUpper();
+			}
+            
 			return View("~/Views/Ciphers/Polybius.cshtml", model);
 		}
 

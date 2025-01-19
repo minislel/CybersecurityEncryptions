@@ -8,15 +8,6 @@
 	<h1 class="display-4">Polybius Square</h1>
 	<p>Encrypt or decrypt a message using the Polybius square.</p>
 </div>
-<div class="text-center">
-	<Button runat="server" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" OnClick="GreetingBtn_Click">
-		Generate the Polybius square
-	</Button>
-
-	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-		Load square file
-	</button>
-</div>
 <div class="container">
 	<div class="row">
 		<div class="col-md-6">
@@ -27,7 +18,7 @@
 				</div>
 				<div class="form-group">
 					<label for="encryptKey">Encryption Key</label>
-					<input type="number" class="form-control" id="encryptKey" name="Key" placeholder="Enter encryption key">
+					<input type="text" class="form-control" id="encryptKey" name="Key" placeholder="Enter encryption key">
 				</div>
 				<button type="submit" class="btn btn-primary">Encrypt</button>
 				<input type="hidden" name="type" value="encrypt" />
@@ -42,7 +33,7 @@
 				</div>
 				<div class="form-group">
 					<label for="decryptKey">Decryption Key</label>
-					<input type="number" class="form-control" id="decryptKey" name="Key" placeholder="Enter decryption key">
+					<input type="text" class="form-control" id="decryptKey" name="Key" placeholder="Enter decryption key">
 				</div>
 				<button type="submit" class="btn btn-primary">Decrypt</button>
 				<input type="hidden" name="type" value="decrypt" />
@@ -61,7 +52,7 @@ else if (Model is not null && Model.type == KeyMessageTypeEnum.Decrypt)
 {
 	<div class="text-center mt-5">
 		<h2>Decrypted Message</h2>
-		<p>@Model.generateSquare</p>
+		<p>@Model.DecryptedMessage</p>
 
 	</div>
 }
@@ -69,6 +60,6 @@ else if (Model is not null && Model.type == KeyMessageTypeEnum.Encrypt)
 {
 	<div class="text-center mt-5">
 		<h2>Encrypted Message</h2>
-		<p>@Model.generateSquare</p>
+		<p>@Model.EncryptedMessage</p>
 	</div>
 }

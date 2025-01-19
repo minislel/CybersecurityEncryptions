@@ -63,9 +63,4 @@ namespace CybersecurityEncryptions.Models
 		public KeyMessageTypeEnum type { get; set; }
 		public char[] Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
 	}
-	public enum KeyMessageTypeEnum
-	{
-		Encrypt,
-		Decrypt
-	}
 }
