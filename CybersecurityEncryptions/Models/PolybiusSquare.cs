@@ -6,7 +6,30 @@ namespace CybersecurityEncryptions.Models
 	{
         private static string alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ";
         public string Key { get; set; }
-		public string Message { get; set; }
+		private string _message { get; set; }
+
+		public string Message { 
+			get 
+			{ 
+				return _message;
+			} 
+			set 
+			{ 
+				for (int i = 0; i < value.Length; i++)
+				{
+					if ( value[i] == 'J')
+					{
+						_message += 'I';
+					}
+					else
+					{
+						_message += char.ToUpper(value[i]);
+					}
+				}
+			} 
+		}
+		
+
 		public char[] Square { get; set; }
 		public KeyMessageTypeEnum type { get; set; }
 		public string EncryptedMessage
@@ -70,9 +93,14 @@ namespace CybersecurityEncryptions.Models
 			while (square.Count < 25)
 			{
 				foreach(var c in key)
-				{  
+				{
 					if (!square.Contains(c))
 					{
+						if (c == 'J' && !square.Contains('I'))
+						{
+							square.Add('I');
+						}
+						else
                         square.Add(c);
                     }
                 }
