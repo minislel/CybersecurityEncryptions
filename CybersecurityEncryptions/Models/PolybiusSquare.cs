@@ -1,37 +1,12 @@
-﻿using System.Text;
+﻿using System.Globalization;
+using System.Text;
 
 namespace CybersecurityEncryptions.Models
 {
-	public class PolybiusSquare
-	{
-        private static string alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ";
-        public string Key { get; set; }
-		private string _message { get; set; }
-
-		public string Message { 
-			get 
-			{ 
-				return _message;
-			} 
-			set 
-			{ 
-				for (int i = 0; i < value.Length; i++)
-				{
-					if ( value[i] == 'J')
-					{
-						_message += 'I';
-					}
-					else
-					{
-						_message += char.ToUpper(value[i]);
-					}
-				}
-			} 
-		}
+	public class PolybiusSquare : AbstractCipher
+    {
+        public char[] Square { get; set; }
 		
-
-		public char[] Square { get; set; }
-		public KeyMessageTypeEnum type { get; set; }
 		public string EncryptedMessage
 		{
 			get
@@ -89,6 +64,10 @@ namespace CybersecurityEncryptions.Models
 		}
 		public static char[] generateSquare(string key)
 		{
+			if (string.IsNullOrEmpty(key))
+			{
+				 key = "ABCDE";
+			}
 			List<char> square = new List<char>();
 			while (square.Count < 25)
 			{
@@ -104,7 +83,7 @@ namespace CybersecurityEncryptions.Models
                         square.Add(c);
                     }
                 }
-				foreach(var c in alphabet)
+				foreach(var c in Alphabet)
 				{
                     if (!square.Contains(c))
 					{

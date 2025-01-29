@@ -1,0 +1,65 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="text-center">
+	<h1 class="display-4">Vignere Cipher</h1>
+	<p>Encrypt or decrypt a message using the Vignere Cipher</p>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<form asp-action="Vignere" method="post">
+				<div class="form-group">
+					<label for="encryptMessage">Message to Encrypt</label>
+					<input type="text" class="form-control" id="encryptMessage" name="Message" placeholder="Enter message to encrypt">
+				</div>
+				<div class="form-group">
+					<label for="encryptKey">Encryption Key</label>
+					<input type="text" class="form-control" id="encryptKey" name="Key" placeholder="Enter encryption key">
+				</div>
+				<button type="submit" class="btn btn-primary">Encrypt</button>
+				<input type="hidden" name="type" value="encrypt" />
+			</form>
+		</div>
+		<div class="col-md-6">
+			<form asp-action="Vignere" method="post">
+				<div class="form-group
+								">
+					<label for="decryptMessage">Message to Decrypt</label>
+					<input type="text" class="form-control" id="decryptMessage" name="Message" placeholder="Enter message to decrypt">
+				</div>
+				<div class="form-group">
+					<label for="decryptKey">Decryption Key</label>
+					<input type="text" class="form-control" id="decryptKey" name="Key" placeholder="Enter decryption key">
+				</div>
+				<button type="submit" class="btn btn-primary">Decrypt</button>
+				<input type="hidden" name="type" value="decrypt" />
+			</form>
+		</div>
+	</div>
+</div>
+@if (Model is not null && (Model.Message is null || Model.Key is null))
+{
+	<div class="text-center mt-5 red">
+		<h2>You must provide a key and a message to encrypt/decrypt!</h2>
+	</div>
+
+}
+else if (Model is not null && Model.type == KeyMessageTypeEnum.Decrypt)
+{
+	<div class="text-center mt-5">
+		<h2>Decrypted Message</h2>
+		<p>@Model.DecryptedMessage</p>
+
+	</div>
+}
+else if (Model is not null && Model.type == KeyMessageTypeEnum.Encrypt)
+{
+	<div class="text-center mt-5">
+		<h2>Encrypted Message</h2>
+		<p>@Model.EncryptedMessage</p>
+	</div>
+}

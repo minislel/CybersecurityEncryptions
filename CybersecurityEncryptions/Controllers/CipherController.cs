@@ -22,6 +22,10 @@ namespace CybersecurityEncryptions.Controllers
             
 			return View("~/Views/Ciphers/Polybius.cshtml", model);
 		}
+		public IActionResult Vignere([FromForm] VignereCipher model)
+		{
+			return View("~/Views/Ciphers/Vignere.cshtml", model);
+		}
 
-    }
+	}
 }

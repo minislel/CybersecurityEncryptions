@@ -2,10 +2,8 @@
 
 namespace CybersecurityEncryptions.Models
 {
-	public class CaesarCipher
-	{
-		public string Key { get; set; }
-		public string Message { get; set; }
+	public class CaesarCipher : AbstractCipher
+    {
 		public string EncryptedMessage
 		{
 			get
@@ -19,7 +17,7 @@ namespace CybersecurityEncryptions.Models
 					if (Alphabet.Contains(c))
 					{
 						
-						int index = Array.IndexOf(Alphabet, c);
+						int index = Alphabet.IndexOf(c);	
 						int key = int.Parse(Key);
 						int encryptedIndex = (index + key) % 26;
 						sb.Append(Alphabet[encryptedIndex]);
@@ -36,31 +34,26 @@ namespace CybersecurityEncryptions.Models
 			{
 				if(Message is not null)
 				{
-
-				
-				StringBuilder sb = new StringBuilder();
-				var mes = Message.ToUpper();
-				foreach (char c in mes)
-				{
-					if (Alphabet.Contains(c))
+					StringBuilder sb = new StringBuilder();
+					var mes = Message.ToUpper();
+					foreach (char c in mes)
 					{
-
-						int index = Array.IndexOf(Alphabet, c);
-						int key = int.Parse(Key);
-						int encryptedIndex = (index - key) % 26;
-						if (encryptedIndex < 0)
+						if (Alphabet.Contains(c))
 						{
-							encryptedIndex += 26;
+							int index = Alphabet.IndexOf(c);
+							int key = int.Parse(Key);
+							int encryptedIndex = (index - key) % 26;
+							if (encryptedIndex < 0)
+							{
+								encryptedIndex += 26;
+							}
+							sb.Append(Alphabet[encryptedIndex]);
 						}
-						sb.Append(Alphabet[encryptedIndex]);
 					}
-				}
-				return sb.ToString();
+					return sb.ToString();
 				}
 				return string.Empty;
 			}
 		}
-		public KeyMessageTypeEnum type { get; set; }
-		public char[] Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
 	}
 }
