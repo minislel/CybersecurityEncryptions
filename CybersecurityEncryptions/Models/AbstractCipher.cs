@@ -6,7 +6,6 @@ namespace CybersecurityEncryptions.Models
     public abstract class AbstractCipher
     {
         protected static string Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        public KeyMessageTypeEnum type { get; set; }
         public static string NormalizeString(string value)
         {
             value = value.Replace('ł', 'l').Replace('Ł', 'L');
@@ -46,5 +45,11 @@ namespace CybersecurityEncryptions.Models
                 _message = NormalizeString(value);
             }
         }
-    }
+        public bool IsModelValid()
+		{
+            return (!string.IsNullOrEmpty(Message) && !string.IsNullOrEmpty(Key));
+		}
+        public abstract string EncryptMessage(string message, string key);
+		public abstract string DecryptMessage(string message, string key);
+	}
 }

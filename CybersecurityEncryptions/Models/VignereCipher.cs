@@ -6,65 +6,59 @@ namespace CybersecurityEncryptions.Models
 {
 	public class VignereCipher : AbstractCipher
 	{
-		public string EncryptedMessage {
-			get
+		public override string EncryptMessage(string message, string key)
+		{
+			if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(message))
 			{
-				if(string.IsNullOrEmpty(Key) || string.IsNullOrEmpty(Message))
-				{
-					return string.Empty;
-				}
-				var sb = new StringBuilder();
-				for (int i = 0; i < Message.Length; i++)
-				{
-					if (Message[i] == ' ')
-					{
-						sb.Append(' ');
-					}
-					else 
-					{
-						var keyIndex = i % Key.Length;
-						var keyChar = Key[keyIndex];
-						var keyCharIndex = Alphabet.IndexOf(keyChar);
-						var messageChar = Message[i];
-						var messageCharIndex = Alphabet.IndexOf(messageChar);
-						var encryptedCharIndex = (messageCharIndex + keyCharIndex) % Alphabet.Length;
-						var encryptedChar = Alphabet[encryptedCharIndex];
-						sb.Append(encryptedChar);
-					}
-				}
-				return sb.ToString();
+				return string.Empty;
 			}
-		}
-		public string DecryptedMessage { 
-			get
+			var sb = new StringBuilder();
+			for (int i = 0; i < message.Length; i++)
 			{
-				if (string.IsNullOrEmpty(Key) || string.IsNullOrEmpty(Message))
+				if (message[i] == ' ')
 				{
-					return string.Empty;
+					sb.Append(' ');
 				}
-				var sb = new StringBuilder();
-				for (int i = 0; i < Message.Length; i++)
+				else
 				{
-					if (EncryptedMessage[i] == ' ')
-					{
-						sb.Append(' ');
-					}
-					else
-					{
-						var keyIndex = i % Key.Length;
-						var keyChar = Key[keyIndex];
-						var keyCharIndex = Alphabet.IndexOf(keyChar);
-						var encryptedChar = Message[i];
-						var encryptedCharIndex = Alphabet.IndexOf(encryptedChar);
-						var decryptedCharIndex = (encryptedCharIndex - keyCharIndex + Alphabet.Length) % Alphabet.Length;
-						var decryptedChar = Alphabet[decryptedCharIndex];
-						sb.Append(decryptedChar);
-					}
+					var keyIndex = i % key.Length;
+					var keyChar = key[keyIndex];
+					var keyCharIndex = Alphabet.IndexOf(keyChar);
+					var messageChar = message[i];
+					var messageCharIndex = Alphabet.IndexOf(messageChar);
+					var encryptedCharIndex = (messageCharIndex + keyCharIndex) % Alphabet.Length;
+					var encryptedChar = Alphabet[encryptedCharIndex];
+					sb.Append(encryptedChar);
 				}
-				return sb.ToString();
 			}
+			return sb.ToString();
 		}
-		public KeyMessageTypeEnum type { get; set; }
-
+		public override string DecryptMessage(string message, string key)
+		{
+			if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(message))
+			{
+				return string.Empty;
+			}
+			var sb = new StringBuilder();
+			for (int i = 0; i < message.Length; i++)
+			{
+				if (message[i] == ' ')
+				{
+					sb.Append(' ');
+				}
+				else
+				{
+					var keyIndex = i % key.Length;
+					var keyChar = key[keyIndex];
+					var keyCharIndex = Alphabet.IndexOf(keyChar);
+					var encryptedChar = message[i];
+					var encryptedCharIndex = Alphabet.IndexOf(encryptedChar);
+					var decryptedCharIndex = (encryptedCharIndex - keyCharIndex + Alphabet.Length) % Alphabet.Length;
+					var decryptedChar = Alphabet[decryptedCharIndex];
+					sb.Append(decryptedChar);
+				}
+			}
+			return sb.ToString();
+		}
 	}
 }

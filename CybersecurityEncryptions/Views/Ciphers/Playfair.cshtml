@@ -5,13 +5,13 @@
 }
 
 <div class="text-center">
-	<h1 class="display-4">Polybius Square</h1>
-	<p>Encrypt or decrypt a message using the Polybius square.</p>
+	<h1 class="display-4">Playfair Cipher</h1>
+	<p>Encrypt or decrypt a message using the Playfair Cipher</p>
 </div>
 <div class="container">
 	<div class="row">
 		<div class="col-md-6">
-			<form asp-action="PolybiusEncrypt" method="post">
+			<form asp-action="PlayfairEncrypt" method="post">
 				<div class="form-group">
 					<label for="encryptMessage">Message to Encrypt</label>
 					<input type="text" class="form-control" id="encryptMessage" name="Message" placeholder="Enter message to encrypt">
@@ -24,7 +24,7 @@
 			</form>
 		</div>
 		<div class="col-md-6">
-			<form asp-action="PolybiusDecrypt" method="post">
+			<form asp-action="PlayfairDecrypt" method="post">
 				<div class="form-group">
 					<label for="decryptMessage">Message to Decrypt</label>
 					<input type="text" class="form-control" id="decryptMessage" name="Message" placeholder="Enter message to decrypt">
