@@ -2,15 +2,15 @@
 
 namespace CybersecurityEncryptions.Models
 {
-	public class CaesarCipher : AbstractCipher
+	public class CaesarCipher : AbstractCipher, ICipher
     {
-		public string DecryptMessage(string message, int key)
+		public static string DecryptMessage(string message, int key)
         {
+            message = NormalizeString(message);
             if (message is not null)
             {
                 StringBuilder sb = new StringBuilder();
-                var mes = message.ToUpper();
-                foreach (char c in mes)
+                foreach (char c in message)
                 {
                     if (Alphabet.Contains(c))
                     {
@@ -27,13 +27,13 @@ namespace CybersecurityEncryptions.Models
             }
             return string.Empty;
         }
-        public string EncryptMessage(string message, int key)
+        public static string EncryptMessage(string message, int key)
         {
+            message = NormalizeString(message);
             if (message is not null)
             {
                 StringBuilder sb = new StringBuilder();
-                var mes = message.ToUpper();
-                foreach (char c in mes)
+                foreach (char c in message)
                 {
                     if (Alphabet.Contains(c))
                     {
@@ -46,11 +46,11 @@ namespace CybersecurityEncryptions.Models
             }
             return string.Empty;
         }
-		public override string EncryptMessage(string message, string key)
+		public static new string EncryptMessage(string message, string key)
 		{
             return EncryptMessage(message, int.Parse(key));
 		}
-		public override string DecryptMessage(string message, string key)
+		public static new string DecryptMessage(string message, string key)
 		{
 			return DecryptMessage(message, int.Parse(key));
 		}

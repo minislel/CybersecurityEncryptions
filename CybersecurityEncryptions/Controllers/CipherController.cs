@@ -1,4 +1,5 @@
 ﻿using CybersecurityEncryptions.Models;
+using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CybersecurityEncryptions.Controllers
@@ -13,100 +14,100 @@ namespace CybersecurityEncryptions.Controllers
         {
             return View("~/Views/Ciphers/Caesar.cshtml");
         }
-        public IActionResult CaesarEncrypt([FromForm] CaesarCipher model)
+        public IActionResult CaesarEncrypt(string message, int? key)
         {
-            if (!model.IsModelValid())
+            if (key is null || string.IsNullOrEmpty(message))
             {
 				ViewBag.ErrorMessage = "Please provide a message and a key";
 				return View("~/Views/Ciphers/Caesar.cshtml");
 			}
-			ViewBag.EncryptedMessage = model.EncryptMessage(model.Message, model.Key); 
+			ViewBag.EncryptedMessage = CaesarCipher.EncryptMessage(message, (int)key); 
 			return View("~/Views/Ciphers/Caesar.cshtml");
 		}
-        public IActionResult CaesarDecrypt([FromForm] CaesarCipher model)
+        public IActionResult CaesarDecrypt(string message, int? key)
         {
-			if (!model.IsModelValid())
-			{
-				ViewBag.ErrorMessage = "Please provide a message and a key";
-				return View("~/Views/Ciphers/Caesar.cshtml");
-			}
-			ViewBag.DecryptedMessage = model.DecryptMessage(model.Message, model.Key);
-			return View("~/Views/Ciphers/Caesar.cshtml");
+            if (key is null || string.IsNullOrEmpty(message))
+            {
+                ViewBag.ErrorMessage = "Please provide a message and a key";
+                return View("~/Views/Ciphers/Caesar.cshtml");
+            }
+            ViewBag.DecryptedMessage = CaesarCipher.DecryptMessage(message, (int)key);
+            return View("~/Views/Ciphers/Caesar.cshtml");
         }
 
         public IActionResult Polybius()
         {
 			return View("~/Views/Ciphers/Polybius.cshtml");
 		}
-        public IActionResult PolybiusEncrypt([FromForm] PolybiusSquare model)
+        public IActionResult PolybiusEncrypt(string message, string key)
         {
-			if (!model.IsModelValid())
+			if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(message))
             {
 				ViewBag.ErrorMessage = "Please provide a message and a key";
 				return View("~/Views/Ciphers/Polybius.cshtml");
 			}
-			ViewBag.EncryptedMessage = model.EncryptMessage(model.Message, model.Key);
+			ViewBag.EncryptedMessage = PolybiusSquare.EncryptMessage(message, key);
 			return View("~/Views/Ciphers/Polybius.cshtml");
 		}
-		public IActionResult PolybiusDecrypt([FromForm] PolybiusSquare model)
+		public IActionResult PolybiusDecrypt(string message, string key)
 		{
-			if (!model.IsModelValid())
-			{
-				ViewBag.ErrorMessage = "Please provide a message and a key";
-				return View("~/Views/Ciphers/Polybius.cshtml");
-			}
-			ViewBag.DecryptedMessage = model.DecryptMessage(model.Message, model.Key);
-			return View("~/Views/Ciphers/Polybius.cshtml");
-		}
+            if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(message))
+            {
+                ViewBag.ErrorMessage = "Please provide a message and a key";
+                return View("~/Views/Ciphers/Polybius.cshtml");
+            }
+            ViewBag.DecryptedMessage = PolybiusSquare.DecryptMessage(message, key);
+            return View("~/Views/Ciphers/Polybius.cshtml");
+        }
 
 		public IActionResult Vignere()
 		{
 			return View("~/Views/Ciphers/Vignere.cshtml");
 		}
-		public IActionResult VignereEncrypt([FromForm] VignereCipher model)
+		public IActionResult VignereEncrypt(string message, string key)
 		{
-			if (!model.IsModelValid())
-			{
-				ViewBag.ErrorMessage = "Please provide a message and a key";
-				return View("~/Views/Ciphers/Vignere.cshtml", model);
-			}
-			ViewBag.EncryptedMessage = model.EncryptMessage(model.Message, model.Key);
-			return View("~/Views/Ciphers/Vignere.cshtml", model);
+            if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(message))
+            {
+                ViewBag.ErrorMessage = "Please provide a message and a key";
+                return View("~/Views/Ciphers/Polybius.cshtml");
+            }
+            ViewBag.EncryptedMessage = VignereCipher.EncryptMessage(message, key);
+			return View("~/Views/Ciphers/Vignere.cshtml");
 		}
-		public IActionResult VignereDecrypt([FromForm] VignereCipher model)
+		public IActionResult VignereDecrypt(string message, string key)
 		{
-			if (!model.IsModelValid())
-			{
-				ViewBag.ErrorMessage = "Please provide a message and a key";
-				return View("~/Views/Ciphers/Vignere.cshtml", model);
-			}
-			ViewBag.DecryptedMessage = model.DecryptMessage(model.Message, model.Key);
-			return View("~/Views/Ciphers/Vignere.cshtml", model);
+            if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(message))
+            {
+                ViewBag.ErrorMessage = "Please provide a message and a key";
+                return View("~/Views/Ciphers/Polybius.cshtml");
+            }
+            ViewBag.DecryptedMessage = VignereCipher.DecryptMessage(message, key);
+			return View("~/Views/Ciphers/Vignere.cshtml");
 		}
 
 		public IActionResult Playfair()
 		{
 			return View("~/Views/Ciphers/Playfair.cshtml");
 		}
-		public IActionResult PlayfairEncrypt([FromForm] PlayfairCipher model)
+		public IActionResult PlayfairEncrypt(string message, string key)
 		{
-			if (!model.IsModelValid())
-			{
-				ViewBag.ErrorMessage = "Please provide a message and a key";
-				return View("~/Views/Ciphers/Playfair.cshtml", model);
-			}
-			ViewBag.EncryptedMessage = model.EncryptMessage(model.Message, model.Key);
-			return View("~/Views/Ciphers/Playfair.cshtml", model);
+            if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(message))
+            {
+                ViewBag.ErrorMessage = "Please provide a message and a key";
+                return View("~/Views/Ciphers/Polybius.cshtml");
+            }
+            ViewBag.EncryptedMessage = PlayfairCipher.EncryptMessage(message, key);
+			return View("~/Views/Ciphers/Playfair.cshtml");
 		}
-		public IActionResult PlayfairDecrypt([FromForm] PlayfairCipher model)
+		public IActionResult PlayfairDecrypt(string message, string key)
 		{
-			if (!model.IsModelValid())
-			{
-				ViewBag.ErrorMessage = "Please provide a message and a key";
-				return View("~/Views/Ciphers/Playfair.cshtml", model);
-			}
-			ViewBag.DecryptedMessage = model.DecryptMessage(model.Message, model.Key);
-			return View("~/Views/Ciphers/Playfair.cshtml", model);
+            if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(message))
+            {
+                ViewBag.ErrorMessage = "Please provide a message and a key";
+                return View("~/Views/Ciphers/Polybius.cshtml");
+            }
+            ViewBag.DecryptedMessage = PlayfairCipher.DecryptMessage(message, key);
+            return View("~/Views/Ciphers/Playfair.cshtml");
 		}
 	}
 }

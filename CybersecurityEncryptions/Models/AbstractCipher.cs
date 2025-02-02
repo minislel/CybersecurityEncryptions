@@ -1,14 +1,15 @@
-﻿using System.Globalization;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.Globalization;
 using System.Text;
 
 namespace CybersecurityEncryptions.Models
 {
-    public abstract class AbstractCipher
+    public abstract class AbstractCipher : ICipher
     {
         protected static string Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         public static string NormalizeString(string value)
         {
-            value = value.Replace('ł', 'l').Replace('Ł', 'L');
+            value = value.Replace('ł', 'l').Replace('Ł', 'L').Replace(" ", string.Empty);
             var normalizedString = value.Normalize(NormalizationForm.FormKD);
             var stringBuilder = new StringBuilder();
             foreach (var c in normalizedString.EnumerateRunes())
@@ -21,35 +22,14 @@ namespace CybersecurityEncryptions.Models
             }
             return stringBuilder.ToString().Normalize(NormalizationForm.FormC).ToUpper();
         }
-        private string _key;
-        public string Key
+        public static string EncryptMessage(string message, string key)
         {
-            get
-            {
-                return _key;
-            }
-            set
-            {
-                _key = NormalizeString(value);
-            }
+            return string.Empty;
         }
-        private string _message;
-        public string Message
+
+        public static string DecryptMessage(string message, string key)
         {
-            get
-            {
-                return _message;
-            }
-            set
-            {
-                _message = NormalizeString(value);
-            }
+            return string.Empty;
         }
-        public bool IsModelValid()
-		{
-            return (!string.IsNullOrEmpty(Message) && !string.IsNullOrEmpty(Key));
-		}
-        public abstract string EncryptMessage(string message, string key);
-		public abstract string DecryptMessage(string message, string key);
-	}
+    }
 }

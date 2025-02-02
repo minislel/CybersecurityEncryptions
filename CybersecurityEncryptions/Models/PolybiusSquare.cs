@@ -5,7 +5,6 @@ namespace CybersecurityEncryptions.Models
 {
 	public class PolybiusSquare : AbstractCipher
     {
-        public char[] Square { get; set; }
 		public static char[] generateSquare(string key)
 		{
 			if (string.IsNullOrEmpty(key))
@@ -37,26 +36,15 @@ namespace CybersecurityEncryptions.Models
 			}
 			return square.ToArray();
 		}
-		
-		public bool SquareContains(char c)
+		public static new string EncryptMessage(string message, string key)
 		{
-			foreach (char ch in Square)
-			{
-				if (ch == c)
-				{
-					return true;
-				}
-			}
-			return false;
-		}
-		public override string EncryptMessage(string message, string key)
-		{
-			if (!string.IsNullOrEmpty(message))
+            key = NormalizeString(key);
+            message = NormalizeString(message);
+            if (!string.IsNullOrEmpty(message))
 			{
 				StringBuilder sb = new StringBuilder();
-				var mes = message.ToUpper();
-				Square = generateSquare(key);
-				foreach (char c in mes)
+                char[] Square = generateSquare(key);
+				foreach (char c in message)
 				{
 					if (Square.Contains(c))
 					{
@@ -70,13 +58,14 @@ namespace CybersecurityEncryptions.Models
 			}
 			return string.Empty;
 		}
-		public override string DecryptMessage(string message, string key)
+		public static new string DecryptMessage(string message, string key)
 		{
-			if (!string.IsNullOrEmpty(message))
+            key = NormalizeString(key);
+            message = NormalizeString(message);
+            if (!string.IsNullOrEmpty(message))
 			{
 				StringBuilder sb = new StringBuilder();
-				Square = generateSquare(Key);
-
+                char[] Square = generateSquare(key);
 				for (int i = 0; i < message.Length; i += 2)
 				{
 					if (i + 1 < message.Length && char.IsDigit(message[i]) && char.IsDigit(message[i + 1]))

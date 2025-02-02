@@ -6,21 +6,17 @@ namespace CybersecurityEncryptions.Models
 {
 	public class VignereCipher : AbstractCipher
 	{
-		public override string EncryptMessage(string message, string key)
+		public static new string EncryptMessage(string message, string key)
 		{
-			if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(message))
+			key = NormalizeString(key);
+            message = NormalizeString(message);
+            if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(message))
 			{
 				return string.Empty;
 			}
 			var sb = new StringBuilder();
 			for (int i = 0; i < message.Length; i++)
 			{
-				if (message[i] == ' ')
-				{
-					sb.Append(' ');
-				}
-				else
-				{
 					var keyIndex = i % key.Length;
 					var keyChar = key[keyIndex];
 					var keyCharIndex = Alphabet.IndexOf(keyChar);
@@ -29,25 +25,20 @@ namespace CybersecurityEncryptions.Models
 					var encryptedCharIndex = (messageCharIndex + keyCharIndex) % Alphabet.Length;
 					var encryptedChar = Alphabet[encryptedCharIndex];
 					sb.Append(encryptedChar);
-				}
 			}
 			return sb.ToString();
 		}
-		public override string DecryptMessage(string message, string key)
+		public static new string DecryptMessage(string message, string key)
 		{
-			if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(message))
+            key = NormalizeString(key);
+            message = NormalizeString(message);
+            if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(message))
 			{
 				return string.Empty;
 			}
 			var sb = new StringBuilder();
 			for (int i = 0; i < message.Length; i++)
 			{
-				if (message[i] == ' ')
-				{
-					sb.Append(' ');
-				}
-				else
-				{
 					var keyIndex = i % key.Length;
 					var keyChar = key[keyIndex];
 					var keyCharIndex = Alphabet.IndexOf(keyChar);
@@ -56,7 +47,7 @@ namespace CybersecurityEncryptions.Models
 					var decryptedCharIndex = (encryptedCharIndex - keyCharIndex + Alphabet.Length) % Alphabet.Length;
 					var decryptedChar = Alphabet[decryptedCharIndex];
 					sb.Append(decryptedChar);
-				}
+				
 			}
 			return sb.ToString();
 		}
