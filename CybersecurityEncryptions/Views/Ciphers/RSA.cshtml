@@ -1,0 +1,87 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="text-center">
+	<h1 class="display-4">RSA</h1>
+	<p>Encrypt or decrypt a message using RSA.</p>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<form asp-action="RSAEncrypt" method="post">
+				<div class="form-group">
+					<label for="encryptMessage">Message to Encrypt</label>
+					<input type="text" class="form-control" id="encryptMessage" name="Message" placeholder="Enter message to encrypt">
+				</div>
+				<div class="form-group">
+					<label for="encryptKey">Public Key</label>
+					<input type="text" class="form-control" id="encryptKey" name="Key" placeholder="Enter your public key">
+				</div>
+				<button type="submit" class="btn btn-primary">Encrypt</button>
+			</form>
+		</div>
+		<div class="col-md-6">
+			<form asp-action="RSADecrypt" method="post">
+				<div class="form-group">
+					<label for="decryptMessage">Message to Decrypt</label>
+					<input type="text" class="form-control" id="decryptMessage" name="Message" placeholder="Enter message to decrypt">
+				</div>
+				<div class="form-group">
+					<label for="decryptKey">Private Key</label>
+					<input type="text" class="form-control" id="decryptKey" name="Key" placeholder="Enter your private key">
+				</div>
+				<button type="submit" class="btn btn-primary">Decrypt</button>
+			</form>
+		</div>
+	</div>
+
+</div>
+<div class="d-flex justify-content-center my-3">
+	<div class="col-md-6 text-center">
+		<input type="button" class="btn btn-primary" value="Generate a keypair" onclick="location.href='@Url.Action("RSAGenerateKeyPair", "Cipher")'" />
+	</div>
+</div>
+@if (ViewBag.ErrorMessage is not null)
+{
+	<div class="text-center mt-5">
+		<h2>@ViewBag.ErrorMessage</h2>
+	</div>
+}
+else if (ViewBag.EncryptedMessage is not null)
+{
+	<div class="text-center mt-5">
+		<h2>Encrypted Message</h2>
+		<textarea disabled class="form-control " rows="5">@ViewBag.EncryptedMessage</textarea>
+	</div>
+}
+else if (ViewBag.DecryptedMessage is not null)
+{
+	<div class="text-center mt-5">
+		<h2>Decrypted Message</h2>
+		<textarea disabled class="form-control " rows="5">@ViewBag.DecryptedMessage</textarea>
+	</div>
+}
+else if(ViewBag.PublicKey is not null)
+{
+	<div class="container">
+		<div class="row">
+            <div class="col-md-6">
+                <h2>Public Key</h2>
+				<textarea disabled class="form-control" rows="5">@ViewBag.PublicKey</textarea>
+				<div class="d-flex justify-content-center">
+					<input type="button" class="btn btn-primary mt-2" value="Copy To Clipboard" onclick="" />
+				</div>
+			</div>
+            <div class="col-md-6">
+                <h2>Private Key</h2>
+				<textarea disabled class="form-control" rows="5">@ViewBag.PrivateKey</textarea>
+				<div class="d-flex justify-content-center">
+					<input type="button" class="btn btn-primary mt-2" value="Copy To Clipboard" onclick="" />
+				</div>
+            </div>
+        </div>
+	</div>
+}

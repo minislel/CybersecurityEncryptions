@@ -109,5 +109,36 @@ namespace CybersecurityEncryptions.Controllers
             ViewBag.DecryptedMessage = PlayfairCipher.DecryptMessage(message, key);
             return View("~/Views/Ciphers/Playfair.cshtml");
 		}
-	}
+        public IActionResult RSA()
+        {
+            return View("~/Views/Ciphers/RSA.cshtml");
+        }
+        public IActionResult RSAEncrypt(string message, string key)
+        {
+            if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(message))
+            {
+                ViewBag.ErrorMessage = "Please provide a message and a key";
+                return View("~/Views/Ciphers/RSA.cshtml");
+            }
+            ViewBag.EncryptedMessage = RSACipher.EncryptMessage(message, key);
+            return View("~/Views/Ciphers/RSA.cshtml");
+        }
+        public IActionResult RSADecrypt(string message, string key)
+        {
+            if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(message))
+            {
+                ViewBag.ErrorMessage = "Please provide a message and a key";
+                return View("~/Views/Ciphers/RSA.cshtml");
+            }
+            ViewBag.DecryptedMessage = RSACipher.DecryptMessage(message, key);
+            return View("~/Views/Ciphers/RSA.cshtml");
+        }
+        public IActionResult RSAGenerateKeyPair()
+        {
+            string[] keys = RSACipher.GenerateKeyPair();
+            ViewBag.PrivateKey = keys[0];
+            ViewBag.PublicKey = keys[1];
+            return View("~/Views/Ciphers/RSA.cshtml");
+        }
+    }
 }
