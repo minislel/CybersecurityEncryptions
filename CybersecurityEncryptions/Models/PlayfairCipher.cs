@@ -4,7 +4,9 @@ namespace CybersecurityEncryptions.Models
 {
 	public class PlayfairCipher : AbstractCipher, ICipher
 	{
-        public static char[] generateSquare(string key)
+		private new static string Alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ";
+
+		public static char[] generateSquare(string key)
         {
             if (string.IsNullOrEmpty(key))
             {
