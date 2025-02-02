@@ -4,9 +4,9 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace CybersecurityEncryptions.Models
 {
-	public class VignereCipher : AbstractCipher
+	public class VignereCipher : AbstractCipher, ICipher
 	{
-		public static new string EncryptMessage(string message, string key)
+		public static string EncryptMessage(string message, string key)
 		{
 			key = NormalizeString(key);
             message = NormalizeString(message);
@@ -28,7 +28,7 @@ namespace CybersecurityEncryptions.Models
 			}
 			return sb.ToString();
 		}
-		public static new string DecryptMessage(string message, string key)
+		public static string DecryptMessage(string message, string key)
 		{
             key = NormalizeString(key);
             message = NormalizeString(message);

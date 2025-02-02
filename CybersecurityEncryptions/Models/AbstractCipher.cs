@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CybersecurityEncryptions.Models
 {
-    public abstract class AbstractCipher : ICipher
+    public abstract class AbstractCipher 
     {
         protected static string Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         public static string NormalizeString(string value)
@@ -21,15 +21,6 @@ namespace CybersecurityEncryptions.Models
                 }
             }
             return stringBuilder.ToString().Normalize(NormalizationForm.FormC).ToUpper();
-        }
-        public static string EncryptMessage(string message, string key)
-        {
-            return string.Empty;
-        }
-
-        public static string DecryptMessage(string message, string key)
-        {
-            return string.Empty;
         }
     }
 }

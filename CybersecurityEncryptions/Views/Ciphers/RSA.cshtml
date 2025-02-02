@@ -54,14 +54,20 @@ else if (ViewBag.EncryptedMessage is not null)
 {
 	<div class="text-center mt-5">
 		<h2>Encrypted Message</h2>
-		<textarea disabled class="form-control " rows="5">@ViewBag.EncryptedMessage</textarea>
+		<textarea id="message" disabled class="form-control " rows="5">@ViewBag.EncryptedMessage</textarea>
+		<button type="button" class="btn btn-primary mt-2" onclick="copyToClipboard('message')">
+			Copy To Clipboard
+		</button>
 	</div>
 }
 else if (ViewBag.DecryptedMessage is not null)
 {
 	<div class="text-center mt-5">
 		<h2>Decrypted Message</h2>
-		<textarea disabled class="form-control " rows="5">@ViewBag.DecryptedMessage</textarea>
+		<textarea id="message" disabled class="form-control " rows="5">@ViewBag.DecryptedMessage</textarea>
+		<button type="button" class="btn btn-primary mt-2" onclick="copyToClipboard('message')">
+			Copy To Clipboard
+		</button>
 	</div>
 }
 else if(ViewBag.PublicKey is not null)
@@ -70,18 +76,23 @@ else if(ViewBag.PublicKey is not null)
 		<div class="row">
             <div class="col-md-6">
                 <h2>Public Key</h2>
-				<textarea disabled class="form-control" rows="5">@ViewBag.PublicKey</textarea>
+				<textarea id="public" disabled class="form-control" rows="5">@ViewBag.PublicKey</textarea>
 				<div class="d-flex justify-content-center">
-					<input type="button" class="btn btn-primary mt-2" value="Copy To Clipboard" onclick="" />
+					<button type="button" class="btn btn-primary mt-2" onclick="copyToClipboard('public')">
+						Copy To Clipboard
+					</button>
 				</div>
 			</div>
             <div class="col-md-6">
                 <h2>Private Key</h2>
-				<textarea disabled class="form-control" rows="5">@ViewBag.PrivateKey</textarea>
+				<textarea id="private" disabled class="form-control" rows="5">@ViewBag.PrivateKey</textarea>
 				<div class="d-flex justify-content-center">
-					<input type="button" class="btn btn-primary mt-2" value="Copy To Clipboard" onclick="" />
+					<button type="button" class="btn btn-primary mt-2" onclick="copyToClipboard('private')" >
+						Copy To Clipboard
+					</button>
 				</div>
             </div>
         </div>
 	</div>
 }
+

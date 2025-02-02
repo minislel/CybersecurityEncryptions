@@ -2,7 +2,7 @@
 
 namespace CybersecurityEncryptions.Models
 {
-	public class PlayfairCipher : AbstractCipher
+	public class PlayfairCipher : AbstractCipher, ICipher
 	{
         public static char[] generateSquare(string key)
         {
@@ -49,7 +49,7 @@ namespace CybersecurityEncryptions.Models
             }
             return position;
         }
-        public static new string DecryptMessage(string message, string key)
+        public static string DecryptMessage(string message, string key)
         {
             message = NormalizeString(message).Replace('J', 'I');
             if (message.Length % 2 != 0)
@@ -92,7 +92,7 @@ namespace CybersecurityEncryptions.Models
             }
             return sb.ToString();
         }
-        public static new string EncryptMessage(string message, string key)
+        public static string EncryptMessage(string message, string key)
 		{
             message = NormalizeString(message).Replace('J', 'I');
             if (message.Length % 2 != 0)

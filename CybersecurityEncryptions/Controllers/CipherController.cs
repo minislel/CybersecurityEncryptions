@@ -39,24 +39,24 @@ namespace CybersecurityEncryptions.Controllers
         {
 			return View("~/Views/Ciphers/Polybius.cshtml");
 		}
-        public IActionResult PolybiusEncrypt(string message, string key)
+        public IActionResult PolybiusEncrypt(string message)
         {
-			if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(message))
+			if (string.IsNullOrEmpty(message))
             {
-				ViewBag.ErrorMessage = "Please provide a message and a key";
+				ViewBag.ErrorMessage = "Please provide a message";
 				return View("~/Views/Ciphers/Polybius.cshtml");
 			}
-			ViewBag.EncryptedMessage = PolybiusSquare.EncryptMessage(message, key);
+			ViewBag.EncryptedMessage = PolybiusSquare.EncryptMessage(message);
 			return View("~/Views/Ciphers/Polybius.cshtml");
 		}
-		public IActionResult PolybiusDecrypt(string message, string key)
+		public IActionResult PolybiusDecrypt(string message)
 		{
-            if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(message))
+            if (string.IsNullOrEmpty(message))
             {
-                ViewBag.ErrorMessage = "Please provide a message and a key";
+                ViewBag.ErrorMessage = "Please provide a message";
                 return View("~/Views/Ciphers/Polybius.cshtml");
             }
-            ViewBag.DecryptedMessage = PolybiusSquare.DecryptMessage(message, key);
+            ViewBag.DecryptedMessage = PolybiusSquare.DecryptMessage(message);
             return View("~/Views/Ciphers/Polybius.cshtml");
         }
 
@@ -120,7 +120,15 @@ namespace CybersecurityEncryptions.Controllers
                 ViewBag.ErrorMessage = "Please provide a message and a key";
                 return View("~/Views/Ciphers/RSA.cshtml");
             }
-            ViewBag.EncryptedMessage = RSACipher.EncryptMessage(message, key);
+            try
+            {
+				ViewBag.EncryptedMessage = RSACipher.EncryptMessage(message, key);
+			}
+            catch
+            {
+				ViewBag.ErrorMessage = "The key was in an incorrect format";
+				return View("~/Views/Ciphers/RSA.cshtml");
+			}
             return View("~/Views/Ciphers/RSA.cshtml");
         }
         public IActionResult RSADecrypt(string message, string key)
@@ -129,8 +137,17 @@ namespace CybersecurityEncryptions.Controllers
             {
                 ViewBag.ErrorMessage = "Please provide a message and a key";
                 return View("~/Views/Ciphers/RSA.cshtml");
-            }
-            ViewBag.DecryptedMessage = RSACipher.DecryptMessage(message, key);
+			}
+            try
+            {
+				ViewBag.DecryptedMessage = RSACipher.DecryptMessage(message, key);
+			}
+            catch
+            {
+				ViewBag.ErrorMessage = "The decryption was unsuccessful. Check if you're using the correct private key and if the message is in Base64 encoded format";
+				return View("~/Views/Ciphers/RSA.cshtml");
+			}
+
             return View("~/Views/Ciphers/RSA.cshtml");
         }
         public IActionResult RSAGenerateKeyPair()

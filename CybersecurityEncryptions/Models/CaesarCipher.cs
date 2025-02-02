@@ -46,11 +46,11 @@ namespace CybersecurityEncryptions.Models
             }
             return string.Empty;
         }
-		public static new string EncryptMessage(string message, string key)
+		public static string EncryptMessage(string message, string key)
 		{
             return EncryptMessage(message, int.Parse(key));
 		}
-		public static new string DecryptMessage(string message, string key)
+		public static string DecryptMessage(string message, string key)
 		{
 			return DecryptMessage(message, int.Parse(key));
 		}

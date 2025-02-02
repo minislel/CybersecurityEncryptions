@@ -16,10 +16,6 @@
 					<label for="encryptMessage">Message to Encrypt</label>
 					<input type="text" class="form-control" id="encryptMessage" name="Message" placeholder="Enter message to encrypt">
 				</div>
-				<div class="form-group">
-					<label for="encryptKey">Encryption Key</label>
-					<input type="text" class="form-control" id="encryptKey" name="Key" placeholder="Enter encryption key">
-				</div>
 				<button type="submit" class="btn btn-primary">Encrypt</button>
 			</form>
 		</div>
@@ -28,10 +24,6 @@
 				<div class="form-group">
 					<label for="decryptMessage">Message to Decrypt</label>
 					<input type="text" class="form-control" id="decryptMessage" name="Message" placeholder="Enter message to decrypt">
-				</div>
-				<div class="form-group">
-					<label for="decryptKey">Decryption Key</label>
-					<input type="text" class="form-control" id="decryptKey" name="Key" placeholder="Enter decryption key">
 				</div>
 				<button type="submit" class="btn btn-primary">Decrypt</button>
 			</form>
@@ -48,13 +40,19 @@ else if (ViewBag.EncryptedMessage is not null)
 {
 	<div class="text-center mt-5">
 		<h2>Encrypted Message</h2>
-		<p>@ViewBag.EncryptedMessage</p>
+		<textarea disabled class="form-control " rows="5" id="message">@ViewBag.EncryptedMessage</textarea>
+		<button type="button" class="btn btn-primary mt-2" onclick="copyToClipboard('message')">
+			Copy To Clipboard
+		</button>
 	</div>
 }
 else if (ViewBag.DecryptedMessage is not null)
 {
 	<div class="text-center mt-5">
 		<h2>Decrypted Message</h2>
-		<p>@ViewBag.DecryptedMessage</p>
+		<textarea disabled id="message" class="form-control " rows="5">@ViewBag.DecryptedMessage</textarea>
+		<button type="button" class="btn btn-primary mt-2" onclick="copyToClipboard('message')">
+			Copy To Clipboard
+		</button>
 	</div>
 }

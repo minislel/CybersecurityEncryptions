@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CybersecurityEncryptions.Models
 {
-	public class RSACipher
+	public class RSACipher : ICipher
 	{
 		public static string[] GenerateKeyPair()
 		{
@@ -15,7 +15,6 @@ namespace CybersecurityEncryptions.Models
 				return new string[] { privateKey, publicKey };
 			}
 		}
-
 		public static string DecryptMessage(string message, string privateKey)
 		{
 			using (RSA rsa = RSA.Create())
@@ -29,7 +28,6 @@ namespace CybersecurityEncryptions.Models
 				return Encoding.UTF8.GetString(decryptedBytes);
 			}
 		}
-
 		public static string EncryptMessage(string message, string publicKey)
 		{
 			using (RSA rsa = RSA.Create())

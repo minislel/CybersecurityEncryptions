@@ -56,6 +56,17 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        function copyToClipboard(id) {
+            var textarea = document.getElementById(id);
+            textarea.select();
+            textarea.setSelectionRange(0, 99999); // For mobile devices
+
+            navigator.clipboard.writeText(textarea.value);
+        }
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
+
 </html>

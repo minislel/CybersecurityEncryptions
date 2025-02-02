@@ -48,13 +48,19 @@ else if (ViewBag.EncryptedMessage is not null)
 {
 	<div class="text-center mt-5">
 		<h2>Encrypted Message</h2>
-		<p>@ViewBag.EncryptedMessage</p>
+		<textarea disabled class="form-control " rows="5" id="message">@ViewBag.EncryptedMessage</textarea>
+		<button type="button" class="btn btn-primary mt-2" onclick="copyToClipboard('message')">
+			Copy To Clipboard
+		</button>
 	</div>
 }
 else if (ViewBag.DecryptedMessage is not null)
 {
 	<div class="text-center mt-5">
 		<h2>Decrypted Message</h2>
-		<p>@ViewBag.DecryptedMessage</p>
+		<textarea disabled class="form-control " rows="5" id="message">@ViewBag.DecryptedMessage</textarea>
+		<button type="button" class="btn btn-primary mt-2" onclick="copyToClipboard('message')">
+			Copy To Clipboard
+		</button>
 	</div>
 }
