@@ -69,7 +69,7 @@ namespace CybersecurityEncryptions.Controllers
             if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(message))
             {
                 ViewBag.ErrorMessage = "Please provide a message and a key";
-                return View("~/Views/Ciphers/Polybius.cshtml");
+                return View("~/Views/Ciphers/Vignere.cshtml");
             }
             ViewBag.EncryptedMessage = VignereCipher.EncryptMessage(message, key);
 			return View("~/Views/Ciphers/Vignere.cshtml");
@@ -79,7 +79,7 @@ namespace CybersecurityEncryptions.Controllers
             if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(message))
             {
                 ViewBag.ErrorMessage = "Please provide a message and a key";
-                return View("~/Views/Ciphers/Polybius.cshtml");
+                return View("~/Views/Ciphers/Vignere.cshtml");
             }
             ViewBag.DecryptedMessage = VignereCipher.DecryptMessage(message, key);
 			return View("~/Views/Ciphers/Vignere.cshtml");
@@ -94,7 +94,7 @@ namespace CybersecurityEncryptions.Controllers
             if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(message))
             {
                 ViewBag.ErrorMessage = "Please provide a message and a key";
-                return View("~/Views/Ciphers/Polybius.cshtml");
+                return View("~/Views/Ciphers/Playfair.cshtml");
             }
             ViewBag.EncryptedMessage = PlayfairCipher.EncryptMessage(message, key);
 			return View("~/Views/Ciphers/Playfair.cshtml");
@@ -104,7 +104,7 @@ namespace CybersecurityEncryptions.Controllers
             if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(message))
             {
                 ViewBag.ErrorMessage = "Please provide a message and a key";
-                return View("~/Views/Ciphers/Polybius.cshtml");
+                return View("~/Views/Ciphers/Playfair.cshtml");
             }
             ViewBag.DecryptedMessage = PlayfairCipher.DecryptMessage(message, key);
             return View("~/Views/Ciphers/Playfair.cshtml");
